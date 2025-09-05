@@ -1,0 +1,82 @@
+:root {
+  --primary-color: #4f46e5;
+  --secondary-color: #818cf8;
+  --text-color: #1f2937;
+  --light-text: #6b7280;
+  --background: #ffffff;
+  --border-radius: 8px;
+  --border-radius-extra: 16px;
+}
+/* * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  line-height: 2;
+} */
+.header-2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0.5rem 0.5rem;
+}
+.header-2 > .left-2a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.right-2a ul {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  list-style-type: none;
+}
+.right-2a li {
+  background-color: var(--secondary-color);
+  padding: 0.2rem 1rem;
+  border-radius: var(--border-radius-extra);
+  cursor: pointer;
+}
+.right-2a li:hover {
+  background-color: var(--primary-color);
+}
+.right-2a li > a {
+  color: white;
+  text-decoration: none;
+}
+/* .right-2a li > span[class="noti"]:after {
+  content: " 7";
+} */
+.right-2a li > span {
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  color: white;
+  font-size: 0.75em;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 1.2rem;
+  width: 1.2rem;
+  max-height: 1.5rem;
+  max-width: 1.5rem;
+  position: relative;
+  top: -8%;
+}
+.right-2a li:hover > span {
+  background-color: var(--secondary-color);
+}
+.right-2a li > a[class="has-dropdown1"]::after {
+  content: " ▼";
+}
+
+.right-2a > nav > ul > li {
+  position: relative;
+}
+/* Each top-level LI becomes a positioning context */
+.right-2a > nav > ul > li {
+  position: relative;
+}

@@ -1,0 +1,231 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  line-height: 1.5;
+  background: tan;
+  height: 100vh;
+}
+a,
+li,
+ul {
+  text-decoration: none;
+  color: black;
+  list-style-type: none;
+}
+
+.container {
+  display: flex;
+  margin: 1rem 1rem;
+  padding: 1rem 1.5rem;
+  justify-content: space-between;
+
+  align-items: center;
+}
+.left > p {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+.nav {
+  padding: 0 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.nav-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 2rem;
+  padding: 0 2rem;
+  margin: 0 2rem;
+}
+
+.nav-link {
+  min-width: 110px;
+  text-align: center;
+  box-sizing: border-box;
+  white-space: nowrap; /* Prevent text from wrapping to a new line */
+}
+.nav-link {
+  background: sandybrown;
+  padding: 1rem 2rem;
+  border-radius: 2rem;
+}
+.nav-link:hover {
+  background: rgb(226, 192, 162);
+}
+.pages {
+  position: relative;
+}
+.menu1 {
+  position: absolute;
+  top: 99%;
+  gap: 1rem;
+  background: sandybrown;
+  left: 0;
+  right: 0;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+.menu1 li {
+  background-color: rgb(228, 179, 174);
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  border-radius: 2rem;
+}
+.menu1 li:hover {
+  background-color: gray;
+}
+.pages:hover .menu1 {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+.menu2 {
+  display: none;
+  max-width: 10rem;
+  width: 8rem;
+  padding: 1rem 1rem;
+  position: absolute;
+  gap: 1rem;
+  top: 2.5rem;
+  background: sandybrown;
+  left: 6.8rem;
+  border-radius: 1rem;
+}
+.teams:hover .menu2 {
+  display: inline-block;
+}
+.material-symbols-outlined {
+  cursor: pointer;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 15rem;
+  max-width: 20rem;
+  display: none;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 2rem;
+  padding: 1rem;
+  box-shadow: -10px 0 10px rgb(0, 0, 0, 0.1);
+  /* transition: all 1s ease-out; */
+}
+.sidebar li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.menuBar {
+  align-self: center;
+  margin-top: 0;
+}
+
+/* Hero Section */
+.hero {
+  background: wheat;
+  margin: 1rem 2rem;
+  padding: 2rem;
+  border-radius: 2rem;
+  box-shadow: 10px 10px 2px rgb(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.left-hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  overflow: hidden;
+}
+.left-hero > p {
+  font-size: 1.2rem;
+  font-weight: 500;
+  font-stretch: normal;
+}
+.buttons {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  overflow: hidden;
+}
+.buttons a {
+  padding: 1rem 2rem;
+  margin: 2rem;
+  border-radius: 2rem;
+  border: 2px solid tan;
+}
+.buttons a:first-child {
+  background-color: tan;
+  color: black;
+  border: 2px solid rgb(107, 62, 3);
+}
+.buttons a:first-child:hover {
+  background-color: white;
+  color: rgb(107, 62, 3);
+  border: 2px solid rgb(107, 62, 3);
+}
+.buttons a:nth-child(2):hover {
+  background-color: tan;
+  color: rgb(107, 62, 3);
+  border: 2px solid rgb(107, 62, 3);
+}
+.right-hero {
+  display: flex;
+
+  flex: 1 1 0;
+  justify-content: center;
+  align-items: center;
+  min-width: 0;
+  min-height: 0;
+}
+.image {
+  width: 150px;
+  height: 150px;
+  background-image: url("default-avatar.jpg");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+/* 
+  This media query will apply CSS rules only when the screen width is less than or equal to 800px.
+  You can add responsive styles inside this block to adjust your layout for smaller screens (like tablets and mobile devices).
+*/
+@media only screen and (max-width: 950px) {
+  .nav-links {
+    display: none;
+  }
+  .menuIcon {
+    visibility: visible;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .buttons {
+    justify-content: center;
+  }
+}
+@media only screen and (min-width: 950px) {
+  .menuIcon {
+    visibility: hidden;
+  }
+}
