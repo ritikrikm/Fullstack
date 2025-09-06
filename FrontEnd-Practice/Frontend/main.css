@@ -1,0 +1,279 @@
+:root {
+  --primary-bg: #1e293b; /* dark blue-gray */
+  --secondary-bg: #334155; /* slightly lighter blue-gray */
+  --accent: #38bdf8; /* sky blue */
+  --accent-hover: #0ea5e9; /* deeper sky blue */
+  --text-main: #f1f5f9; /* very light gray */
+  --text-secondary: #94a3b8; /* muted blue-gray */
+  --sidebar-bg: #0f172a; /* very dark blue */
+  --sidebar-active: #2563eb; /* blue */
+  --border-color: #475569; /* medium blue-gray */
+  --danger: #ef4444; /* red */
+  --success: #22c55e; /* green */
+  --warning: #facc15; /* yellow */
+  --info: #38bdf8; /* sky blue */
+  --white: #ffffff;
+  --black: #000000;
+  --boxshadow: 5px 5px 0 rgb(0, 0, 0, 0.1);
+  --sidebarWidth: 260px;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  line-height: 1.5;
+
+  height: 100vh;
+  background: var(--primary-bg);
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+#sidebar a,
+#sidebar ul,
+#sidebar li,
+.submit,
+.choice a {
+  text-decoration: none;
+  list-style-type: none;
+}
+
+#sidebar {
+  /* position: fixed; */
+  /* max-width: 280px; */
+  /* width: var(--sidebarWidth); */
+  background: var(--secondary-bg);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  padding: 1rem 2rem;
+}
+#sidebar .top {
+  width: 100%;
+  background: var(--accent);
+  border-radius: 1rem;
+  padding: 1rem;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: var(--boxshadow);
+}
+#sidebar .top:hover {
+  background: var(--accent-hover);
+}
+
+#sidebar .top .text {
+  font-size: 1rem;
+  font-weight: 350;
+  text-wrap: wrap;
+}
+#sidebar .nav-links {
+  box-shadow: var(--boxshadow);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding: 2rem;
+  margin: 2rem 0;
+  background: var(--accent);
+  border-radius: 2rem;
+}
+#sidebar .nav-links li {
+  width: 100%;
+  flex: 1 1 0;
+  background: var(--accent-hover);
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2rem;
+  cursor: pointer;
+
+  box-shadow: 5px 5px 0 rgb(0, 0, 0, 0.5);
+}
+#sidebar .nav-links li a {
+  color: var(--primary-bg);
+
+  align-self: center;
+}
+#sidebar .nav-links li:hover {
+  background-color: var(--border-color);
+}
+#sidebar .nav-links li.active {
+  background-color: var(--border-color);
+}
+#sidebar .nav-links li.active a {
+  color: white;
+}
+#app-layout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1 1 auto;
+  flex-wrap: wrap;
+  background: var(--accent);
+  border-radius: 2rem;
+  margin: 2rem;
+}
+.container {
+  display: none;
+}
+
+.container.active {
+  border: 1px solid white;
+  background: var(--secondary-bg);
+  border-radius: 2rem;
+  box-shadow: var(--boxshadow);
+  display: flex;
+  width: 60%;
+  height: 600px;
+  max-height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.user {
+  display: grid;
+  grid-template-rows: auto 1fr auto; /* choice buttons, form area, submit button */
+  height: 100%;
+  justify-items: center;
+  align-items: center;
+}
+
+.auth-choice.active {
+  background: var(--sidebar-active);
+}
+
+.choice {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 3rem;
+  grid-row: 2;
+  max-width: 100%;
+  width: 100%;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+.user:has(.auth-choice.active) {
+  grid-template-rows: auto 1fr auto;
+}
+.user:has(.auth-choice.active) .choice {
+  grid-row: 1;
+}
+.user.user:has(.auth-choice.active) #formA.active,
+.user.user:has(.auth-choice.active) #formB.active {
+  grid-row: 2;
+  display: flex !important;
+  flex-direction: column !important;
+}
+.user:has(.auth-choice.active) .submit {
+  grid-row: 3;
+  display: flex;
+}
+.choice span {
+  color: black;
+  font-size: 1.2rem;
+  text-wrap: wrap;
+}
+
+.choice a {
+  background: var(--info);
+  padding: 1rem 1.5rem;
+  border-radius: 2rem;
+  max-width: 100%;
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid white;
+}
+.choice a:hover {
+  background: var(--sidebar-active);
+}
+.submit {
+  border: 2px solid white;
+  background: var(--info);
+  padding: 1rem 1.5rem;
+  border-radius: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+  margin-bottom: 2rem;
+}
+.submit span {
+  color: black;
+}
+.submit:hover {
+  background: var(--sidebar-active);
+}
+
+#form,
+#formb {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  gap: 1rem;
+  max-width: 100%;
+
+  margin: 3rem;
+}
+#formA.auth.active {
+  display: block !important;
+}
+#formB.auth.active {
+  display: block !important;
+}
+#formA.auth.active ~ #formB {
+  display: none !important;
+}
+#formB.auth.active ~ #formA {
+  display: none !important;
+}
+
+/* #formA.auth.active {
+  display: block !important;
+}
+#formA.auth.active ~ #formB.auth {
+  display: none !important;
+}
+#formB.auth.active {
+  display: block !important;
+}
+  */
+#formA.auth:not(.active),
+#formB.auth:not(.active) {
+  display: none !important;
+}
+
+label {
+  font-size: 1rem;
+  color: white;
+  font-weight: 400;
+  background: var(--info);
+  padding: 0.1rem 0.5rem;
+  border-radius: 2rem;
+}
+label:hover {
+  background: var(--sidebar-active);
+}
+input {
+  border: 2px solid black;
+  padding: 1rem;
+  width: 100%;
+  max-width: 300px;
+  border-radius: 1rem;
+  font-size: 1rem;
+  box-shadow: 5px 5px 0 rgb(0, 0, 0, 0.1);
+}

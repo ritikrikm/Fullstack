@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ProjectAdmin</title>
+    <link rel="stylesheet" href="main.css" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <section id="sidebar">
+      <a class="top">
+        <span class="text"> Ritik's Project</span>
+      </a>
+      <ul class="nav-links">
+        <li class="nav-link active">
+          <a class="0" href=""> User </a>
+        </li>
+        <li>
+          <a class="1" href=""> Projects </a>
+        </li>
+        <li>
+          <a class="2" href=""> Members </a>
+        </li>
+      </ul>
+    </section>
+    <section id="app-layout">
+      <section id="container" class="container active">
+        <div class="user">
+          <div class="choice">
+            <a itemid="0" class="auth-choice" href="">
+              <span>Register</span>
+            </a>
+            <a itemid="1" class="auth-choice" href="">
+              <span>Login</span>
+            </a>
+          </div>
+          <div id="formA" class="auth">
+            <form id="form">
+              <label for="userName">UserName</label>
+              <input type="text" placeholder="username" required="true" />
+
+              <label for="email">Email</label>
+              <input
+                type="text"
+                placeholder="email@gmail.com"
+                required="true"
+              />
+
+              <label for="password">Password</label>
+              <input type="password" placeholder="password" required="true" />
+            </form>
+            <a class="submit" href="">
+              <span>Submit</span>
+            </a>
+          </div>
+          <div id="formB" class="auth">
+            <form id="formb">
+              <label for="email">Email</label>
+              <input
+                type="text"
+                placeholder="email@gmail.com"
+                required="true"
+              />
+
+              <label for="password">Password</label>
+              <input type="password" placeholder="password" required="true" />
+            </form>
+            <a class="submit" href="">
+              <span>Submit</span>
+            </a>
+          </div>
+        </div>
+      </section>
+      <section id="container2" class="container"></section>
+      <section id="container3" class="container"></section>
+    </section>
+  </body>
+  <script src="main.js"></script>
+</html>
