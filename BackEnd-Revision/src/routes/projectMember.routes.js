@@ -1,9 +1,39 @@
 import e from 'express'
-import { addMembers } from '../controllers/projectMembers.controllers.js'
-const router = e.Router()
 
-router.post('/addMember/:projectId', addMembers)
-router.post('/modifyMember')
-router.post('/deleteMember')
+import { validationEngine } from '../validators/validatorEngine.validators.js'
+import {
+    addMemberValidator,
+    removeMemberValidator,
+} from '../validators/validator.js'
+import { userLoggedIn } from '../middlewares/auth.middlewares.js'
+import { asyncHandler } from '../utils/async-handler.js'
+import {
+    addMembers,
+    removeMember,
+    getAllMember,
+} from '../controllers/projectMembers.controllers.js'
 
-export default router
+const memberRouter = e.Router()
+
+memberRouter.post(
+    '/addMember/:projectId',
+    addMemberValidator(),
+    validationEngine,
+    userLoggedIn,
+    asyncHandler(addMembers)
+)
+memberRouter.get(
+    '/removeMember/:projectId',
+    removeMemberValidator(),
+    validationEngine,
+    userLoggedIn,
+    asyncHandler(removeMember)
+)
+memberRouter.get(
+    '/getAllMember/:projectId',
+
+    userLoggedIn,
+    asyncHandler(getAllMember)
+)
+
+export default memberRouter

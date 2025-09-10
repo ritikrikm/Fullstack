@@ -61,12 +61,49 @@ const userSchema = new Schema(
         timestamps: true,
     }
 )
+userSchema.methods.bodyGenerator = function (context, newUser, link) {
+    switch (context) {
+        case 'creationVerification':
+            var intro =
+                "Welcome to Ritik Project! We're very excited to have you on board."
+            var instructions = 'To get started with me, please click here:'
+            var text = 'Confirm your account'
+            var endlink = link
+        case 'resendVerification':
+            var intro =
+                'Welcome to Ritik Project! you have requested for an email verification'
+            var instructions =
+                'To complete the verification, please click here:'
+            var text = 'Confirm your account'
+            var endlink = link
+    }
+    var email = {
+        body: {
+            name: newUser.fullName,
+            intro: intro,
+            action: {
+                instructions: instructions,
+                button: {
+                    color: '#22BC66', // Optional action button color
+                    text: text,
+                    link: endlink,
+                },
+            },
+            outro: "Need help, or have questions? Just reply to this email, we'd love to help.",
+        },
+    }
+    return email
+}
 userSchema.pre('save', async function (next) {
     if (this.isModified('password')) {
         this.password = await bcrypt.hash(this.password, 10)
     }
     next()
 })
+userSchema.methods.verificationLinkGenerator = function (hashedToken) {
+    const link = `http://localhost:8080/user/verify/${hashedToken}`
+    return link
+}
 userSchema.methods.verifyingToken = function (hashedToken, unhashedDBToken) {
     const hashedDBToken = crypto
         .createHash('sha1')

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TheCreativeBud</title>
+    <link rel="stylesheet" href="commerce.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Icons"
+    />
+  </head>
+  <body>
+    <header id="head">
+      <div class="upper">
+        <div class="upperLeft">
+          <h3 class="title">The<span class="title-2">CreativeBud</span></h3>
+          <span id="login">Login</span> OR
+          <span id="register"> Register</span>
+        </div>
+        <div class="upperRight">
+          <ul class="nav-links">
+            <li>
+              <a href="">b</a>
+            </li>
+            <li>
+              <a href="">i</a>
+            </li>
+            <li>
+              <a href="">g</a>
+            </li>
+            <li>
+              <a href="">m</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="middle">
+        <div class="midLeft">
+          <a href="">
+            <span class="material-icons">call</span>
+            <span id="contact">+1 2269613847</span>
+          </a>
+        </div>
+        <div class="mid">
+          <h3 class="title-mid">
+            The<span class="title-2-mid">CreativeBud</span>
+          </h3>
+          <span id="desc"
+            >One stop destination for all your creative needs</span
+          >
+        </div>
+        <div class="midRight">
+          <a href="">
+            <span class="material-icons">mail</span>
+            <span id="email">info@creativebud.ca</span>
+          </a>
+        </div>
+      </div>
+      <div class="lower">
+        <div class="low">
+          <ul class="nav-links-lower">
+            <li>
+              <a href="">
+                <span class="material-icons"> home </span>
+                Home</a
+              >
+            </li>
+            <li>
+              <a href="">
+                <span class="material-icons"> book </span>Stationary</a
+              >
+            </li>
+            <li>
+              <a href=""
+                ><span class="material-icons"> discount </span>Special Offers</a
+              >
+            </li>
+            <li>
+              <a href=""
+                ><span class="material-icons"> inventory_2 </span>Accessories</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <section id="trend">
+      <div class="section-info">
+        <span class="info-title">Trending</span>
+        <p class="info-para">
+          Stay ahead of the curve with our Top Trends collection at
+          TheCreativeBud. We've curated the most sought-after items of the
+          season, blending cutting-edge style with unparalleled quality. From
+          the latest in fashion to innovative lifestyle products, our selection
+          is geared towards those who appreciate the finer things in life.
+          Whether you're ooking to make a statement or find something uniquely
+          you, our Top Trends showcase the best in contemporary design and
+          functionality. Elevate your experience with pieces that are as
+          distinctive as they are desirable, all just a click away.
+        </p>
+      </div>
+      <div class="carousel-container">
+        <!-- Main Product Display -->
+        <div class="main-product-display">
+          <!-- <img id="main-product-image" src="" alt="Product" /> -->
+          <h2 id="main-product-name"></h2>
+          <p id="main-product-desc"></p>
+        </div>
+        <!-- Carousel Images with Side Previews -->
+        <div class="carousel-images">
+          <!-- Previous Product (Left Side) -->
+          <div class="side-image left-side">
+            <img id="prev-product-image" src="" alt="Previous Product" />
+            <div class="side-overlay"></div>
+          </div>
+
+          <!-- 3D Cube Section -->
+          <div class="current-product">
+            <div class="cube-section">
+              <div class="container">
+                <div class="cube">
+                  <div class="face front">
+                    <div class="img_box">
+                      <img id="cube-front" src="" alt="Front view" />
+                    </div>
+                    <div class="content">
+                      <h1 class="name" id="cube-name"></h1>
+                      <span class="job" id="cube-category"></span>
+                    </div>
+                  </div>
+                  <div class="face right">
+                    <div class="img_box">
+                      <img id="cube-right" src="" alt="Right view" />
+                    </div>
+                    <div class="content">
+                      <h1 class="name"></h1>
+                      <span class="job"></span>
+                    </div>
+                  </div>
+                  <div class="face left">
+                    <div class="img_box">
+                      <img id="cube-left" src="" alt="Left view" />
+                    </div>
+                    <div class="content">
+                      <h1 class="name"></h1>
+                      <span class="job"></span>
+                    </div>
+                  </div>
+                  <div class="face back">
+                    <div class="img_box">
+                      <img id="cube-back" src="" alt="Back view" />
+                    </div>
+                    <div class="content">
+                      <h1 class="name"></h1>
+                      <span class="job"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="arrow">
+                  <span id="left" class="material-icons">chevron_left</span>
+                  <span id="right" class="material-icons">chevron_right</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="side-image right-side">
+            <img id="next-product-image" src="" alt="Next Product" />
+            <div class="side-overlay"></div>
+          </div>
+        </div>
+        <!-- Carousel Controls -->
+        <div class="carousel-controls">
+          <button id="prev-product">← Previous</button>
+          <div class="product-indicators" id="indicators">
+            <!-- Dots generated dynamically -->
+          </div>
+          <button id="next-product">Next →</button>
+        </div>
+      </div>
+    </section>
+    <script type="module" src="commerce.js"></script>
+  </body>
+</html>

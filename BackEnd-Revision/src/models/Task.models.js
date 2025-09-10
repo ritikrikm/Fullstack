@@ -1,21 +1,25 @@
 import mongoose from 'mongoose'
-import { taskModelStatus } from '../utils/constants.js'
+import { taskModelStatus, taskModelStatusValues } from '../utils/constants.js'
+import { Schema } from 'mongoose'
 const taskSchema = new Schema(
     {
         title: {
             type: String,
+            require: true,
         },
         description: {
             type: String,
+            require: true,
         },
         status: {
-            type: Enum,
+            type: String,
+            enum: taskModelStatusValues,
             default: taskModelStatus.TODO,
         },
         attachments: [
             {
-                URI,
-                mimetype,
+                URI: String,
+                mimetype: String,
             },
         ],
         project: {

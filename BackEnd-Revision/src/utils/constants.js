@@ -6,8 +6,9 @@ export const UserModelRole = {
 export const UserModelRoleValues = Object.values(UserModelRole)
 
 export const taskModelStatus = {
-    TODO: 'todo',
+    TODO: 'TODO',
     INPROGRESS: 'In Progress',
     DONE: 'Done',
 }
+
 export const taskModelStatusValues = Object.values(taskModelStatus)

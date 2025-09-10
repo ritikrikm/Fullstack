@@ -28,10 +28,8 @@ const userRegister = async (req, res) => {
     res.status(200).json(response)
 }
 const emailVerify = async (req, res) => {
-    const { email } = req.body
     const { token } = req.params
-
-    const response = await emailVerifyService({ email, token })
+    const response = await emailVerifyService({ token })
     console.log(response)
     if (response instanceof API_ERROR) {
         return res.status(response.statusCode || 400).json({
@@ -83,7 +81,13 @@ const tokenRotation = async (req, res) => {
     // if (!refreshToken.startsWith('Bearer '))
     //     return new API_ERROR(400, 'Token is not present in header')
     // refreshToken = refreshToken.slice(7)
+    let accessToken = req.headers['authorization']
+
+    if (!accessToken || !accessToken.startsWith('Bearer '))
+        return new API_ERROR(400, 'Token invalid')
+    accessToken = accessToken.slice(7)
     const refreshTokenCookie = req.cookies['refresh']
+    const user = req.user
     if (!refreshTokenCookie)
         return new API_ERROR(401, 'refreshCookieNotPresent')
 
@@ -91,6 +95,19 @@ const tokenRotation = async (req, res) => {
         refreshTokenCookie,
         user,
     })
+
+    if (response instanceof API_ERROR) {
+        return res.status(response.statusCode || 400).json({
+            message: response.message,
+            success: response.success,
+        })
+    } else {
+        res.status(200).json({
+            message: response.message,
+            data: { ...response.data, user },
+            success: response.isSuccess,
+        })
+    }
 }
 const LoggedIn = async (req, res) => {
     const response = await LoggedInService()

@@ -2,6 +2,7 @@ import mongoose from 'mongoose'
 import {
     addMembersService,
     removeMemberService,
+    getAllMemberService,
 } from '../services/projectMembers.services.js'
 import { API_ERROR } from '../utils/api-error.js'
 
@@ -51,4 +52,20 @@ const removeMember = async (req, res) => {
         data: response.data,
     })
 }
-export { addMembers, removeMember }
+const getAllMember = async (req, res) => {
+    const projectId = req.params
+    const response = await getAllMemberService({
+        projectId,
+    })
+    if (response instanceof API_ERROR) {
+        return res.status(response.statusCode || 400).json({
+            message: response.message,
+            success: response.success,
+        })
+    }
+    res.status(200).json({
+        message: response.message,
+        data: response.data,
+    })
+}
+export { addMembers, removeMember, getAllMember }

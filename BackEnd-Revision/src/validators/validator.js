@@ -1,4 +1,4 @@
-import { body } from 'express-validator'
+import { body, param } from 'express-validator'
 
 const authValidator = () => {
     return [
@@ -52,9 +52,40 @@ const removeMemberValidator = () => {
 }
 const createProjectValidator = () => {
     return [
-        body('name').notEmpty().withMessage('Role is required'),
+        body('name').notEmpty().withMessage('Name is required'),
         body('description').notEmpty().withMessage('Email is required'),
-        body('createdBy').notEmpty().withMessage('Internal Error'),
+    ]
+}
+const deleteProjectValidator = () => {
+    return [param('projectId').notEmpty().withMessage('Project ID is required')]
+}
+const modifyProjectValidator = () => {
+    return [
+        body('name').notEmpty().withMessage('Name is required'),
+        body('description').notEmpty().withMessage('Email is required'),
+    ]
+}
+const addTaskValidator = () => {
+    return [
+        param('projectId')
+            .notEmpty()
+            .withMessage('ProjectId is required, server error'),
+        param('projectId')
+            .isString()
+            .withMessage('Incorrect Project Id Validator'),
+        body('title').notEmpty().withMessage('Title is required'),
+        body('description').notEmpty().withMessage('Description is required'),
+        body('assignedTo')
+            .notEmpty()
+            .withMessage('AssignedTo is required')
+            .isObject()
+            .withMessage('AssignedTo must be an object'),
+
+        body('assignedBy')
+            .notEmpty()
+            .withMessage('AssignedBy is required')
+            .isObject()
+            .withMessage('AssignedBy must be an object'),
     ]
 }
 
@@ -65,4 +96,7 @@ export {
     addMemberValidator,
     removeMemberValidator,
     createProjectValidator,
+    addTaskValidator,
+    modifyProjectValidator,
+    deleteProjectValidator,
 }

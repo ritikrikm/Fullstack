@@ -1,6 +1,7 @@
 import User from '../models/User.models.js'
 import { API_ERROR } from '../utils/api-error.js'
 import { API_RESPONSE } from '../utils/api-response.js'
+import { sendEmail } from '../validators/email.js'
 const createUserService = async ({ userName, fullName, email, password }) => {
     const checkUser = await User.findOne({ email: email })
     if (checkUser) return new API_ERROR(400, 'User Already Exists')
@@ -21,6 +22,14 @@ const createUserService = async ({ userName, fullName, email, password }) => {
     newUser.emailVerificationToken = tokenData.unhashedToken
     newUser.emailVerificationExpiry = tokenData.tokenExpiry
     //email sending and saving the data using .save
+    //link: something/hsahedToken
+    const link = newUser.verificationLinkGenerator(tokenData.hashedToken)
+    const emailBody = newUser.bodyGenerator(
+        'creationVerification',
+        newUser,
+        link
+    )
+    await sendEmail(emailBody, newUser)
 
     await newUser.save()
     return new API_RESPONSE(
@@ -35,8 +44,8 @@ const createUserService = async ({ userName, fullName, email, password }) => {
         true
     )
 }
-const emailVerifyService = async ({ email, token }) => {
-    const checkUser = await User.findOne({ email: email })
+const emailVerifyService = async ({ user, token }) => {
+    const checkUser = await User.findOne({ email: user.email })
     if (!checkUser) return new API_ERROR(400, 'User do not exists')
     const dbToken = checkUser.emailVerificationToken
     const dbTokenExpiry = checkUser.emailVerificationExpiry
@@ -45,6 +54,8 @@ const emailVerifyService = async ({ email, token }) => {
     const tokenCheck = checkUser.verifyingToken(token, dbToken)
     if (!tokenCheck) return new API_ERROR(400, 'Token different')
     checkUser.isEmailVerified = tokenCheck
+    checkUser.emailVerificationExpiry = undefined
+    checkUser.emailVerificationExpiry = undefined
     await checkUser.save()
     return new API_RESPONSE(200, checkUser, 'EmailVerifiedSuccess', true)
 }
@@ -73,19 +84,37 @@ const userLoginService = async ({ email, password }) => {
         true
     )
 }
-const tokenRotationService = async ({ refreshTokenCookie, user }) => {
-    const checkExpiry = user.tokenExpiryCheck(refreshTokenCookie)
-
-    if (checkExpiry) {
-        user.refreshToken = undefined
-        refreshTokenCookie = user.generateRefreshToken()
-        user.refreshToken = refreshTokenCookie
+const tokenRotationService = async ({
+    accessToken,
+    refreshTokenCookie,
+    user,
+}) => {
+    console.log('NOW ' + user)
+    const userObject = await User.findOne({ _id: user._id })
+    if (!userObject) {
+        return new API_ERROR(400, 'User not found')
     }
-    const newAccessToken = user.generateAccessToken()
+    const checkRefreshExpiry =
+        await userObject.tokenExpiryCheck(refreshTokenCookie)
 
-    await user.save()
+    if (!checkRefreshExpiry) {
+        userObject.refreshToken = undefined
+        refreshTokenCookie = await userObject.generateRefreshToken()
+        userObject.refreshToken = refreshTokenCookie
+    }
+    const newAccessToken = await userObject.generateAccessToken()
 
-    return { refreshTokenCookie, newAccessToken }
+    await userObject.save()
+
+    return new API_RESPONSE(
+        200,
+        {
+            refreshTokenCookie: refreshTokenCookie,
+            newAccessToken: newAccessToken,
+        },
+        'Token Created',
+        true
+    )
 }
 export {
     createUserService,

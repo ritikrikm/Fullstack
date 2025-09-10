@@ -79,4 +79,13 @@ const removeMemberService = async ({
     const removedMember = checkUser._id
     return new API_RESPONSE(200, removedMember, 'Member removed successfully')
 }
-export { addMembersService, removeMemberService }
+const getAllMemberService = async ({ projectId }) => {
+    const isProject = await ProjectModel.findById(projectId.projectId)
+    if (!isProject) return new API_ERROR(400, 'Project Not Found')
+    const allMembers = await ProjectMember.findOne({
+        project: new mongoose.Types.ObjectId(projectId.projectId),
+    })
+    if (!allMembers) return new API_ERROR(400, 'No members in the project')
+    return new API_RESPONSE(200, allMembers, 'members found', true)
+}
+export { addMembersService, removeMemberService, getAllMemberService }
