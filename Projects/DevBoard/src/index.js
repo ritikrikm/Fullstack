@@ -3,8 +3,7 @@ import dotenv from 'dotenv'
 import { database } from './database.js'
 import { logger } from './Utils/logger.js'
 
-const options = { origin: './.env' }
-dotenv.config(options)
+dotenv.config({ path: './.env' })
 const PORT = process.env.PORT ?? 8080
 database()
     .then(() => {
